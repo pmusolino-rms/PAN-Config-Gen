@@ -32,13 +32,10 @@ for section_name in config.sections():
 			PASS = value
 			next
 
-#URL = 'https://IBLOX-MASTER/wapi/v1.7.1/'
 TENANTCOMMENT='APP_01'
 TENANTPREFIX='TEN'
 PEERINGCOMMENT='Edge'
 PEERINGPREFIX='TENANT-'
-#USERNAME='USERNAME'
-#PASS='PASSWORD'
 
 def requestsGetHandler(url,debug):
 	if debug:
@@ -120,7 +117,7 @@ def main():
 	x.align["Value"] = "r"
 	x.padding_width = 5
 	parser = argparse.ArgumentParser(description='Generate PAN config for tenants')
-	parser.add_argument('-v', '--version', action='version',version='%(prog)s (version 0.2)')	
+	parser.add_argument('-v', '--version', action='version',version='%(prog)s (version 0.5)')
 	parser.add_argument("-d", "--debug", help="Verbose output", action="store_true")
 	parser.add_argument("-i", "--info", help="Just output tenant info", action="store_true")
 	parser.add_argument("tenant_id", type=int)
