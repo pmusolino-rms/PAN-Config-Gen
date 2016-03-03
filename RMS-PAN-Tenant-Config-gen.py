@@ -8,18 +8,38 @@ import urllib3.contrib.pyopenssl
 import logging
 import ipaddress
 from prettytable import PrettyTable
+import ConfigParser
 
 urllib3.contrib.pyopenssl.inject_into_urllib3()
 urllib3.disable_warnings()
 logging.captureWarnings(True)
 
-URL = 'https://IBLOX-MASTER/wapi/v1.7.1/'
+try:
+	config = ConfigParser.SafeConfigParser()
+	config.read('config.ini')
+except ConfigParser.ParsingError, err:
+	print 'Cound not parse:', err
+
+for section_name in config.sections():
+	for name,value in config.items(section_name):
+		if name =="url":
+			URL = value
+		next
+		if name == "username":
+			USERNAME = value
+			next
+		if name == "password":
+			PASS = value
+			next
+
+#URL = 'https://IBLOX-MASTER/wapi/v1.7.1/'
 TENANTCOMMENT='APP_01'
-TENANTPREFIX='Ten'
+TENANTPREFIX='TEN'
 PEERINGCOMMENT='Edge'
-PEERINGPREFIX='Tenant-'
-USERNAME='USERNAME'
-PASS='PASSWORD'
+PEERINGPREFIX='TENANT-'
+#USERNAME='USERNAME'
+#PASS='PASSWORD'
+
 def requestsGetHandler(url,debug):
 	if debug:
 		print url
@@ -43,6 +63,9 @@ def getNetwork(tenant,prefix,comment,debug):
 					print network
 				networkObject=ipaddress.IPv4Network(network)
 				return(networkObject)
+			else:
+				print "Network not found"
+				sys.exit(1)
 
 def createConfig(network,pre,fwIP,gateway,tenant,vlan):
 	#create interface line
@@ -97,7 +120,7 @@ def main():
 	x.align["Value"] = "r"
 	x.padding_width = 5
 	parser = argparse.ArgumentParser(description='Generate PAN config for tenants')
-	parser.add_argument('-v', '--version', action='version',version='%(prog)s (version 0.1)')	
+	parser.add_argument('-v', '--version', action='version',version='%(prog)s (version 0.2)')	
 	parser.add_argument("-d", "--debug", help="Verbose output", action="store_true")
 	parser.add_argument("-i", "--info", help="Just output tenant info", action="store_true")
 	parser.add_argument("tenant_id", type=int)
