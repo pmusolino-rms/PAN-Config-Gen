@@ -1,7 +1,7 @@
 # Pan-Config-Gen
-<html><head><meta charset="utf-8"><style>
+<html><head>
 
-</style><title>README</title></head><body><article class="markdown-body"><h1 id="fw-tenant-config-gen"><a name="user-content-fw-tenant-config-gen" href="#fw-tenant-config-gen" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>fw-tenant-config-gen</h1>
+<title>README</title></head><body><article class="markdown-body"><h1 id="fw-tenant-config-gen"><a name="user-content-fw-tenant-config-gen" href="#fw-tenant-config-gen" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>fw-tenant-config-gen</h1>
 <p>Generates firewall configuration for Palo Alto devices based on Infoblox iPam information</p>
 <p>In order to run this, you will need to meet the following pre-requisites:<br />
 Python 2.7 or later<br />
@@ -14,9 +14,10 @@ requests<br />
 certifi<br />
 urllib3<br />
 pyopenssl<br />
-pyasnl<br />
-ndghttpsclient<br />
-PrettyTable</p>
+pyasn1<br />
+ndg-httpsclient<br />
+PrettyTable<br />
+IPAddress</p>
 <p>Once Everything is installed, you will need to edit the config.ini and modify:<br />
 IBLOX-MASTER for the dnsname or IP of the Infoblox master<br />
 Username and Password for the credentials with access to the Infoblox master.</p>
